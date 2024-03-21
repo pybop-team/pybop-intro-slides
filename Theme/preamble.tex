@@ -1,0 +1,136 @@
+
+% Define font settings
+\usefonttheme{serif}
+\setbeamerfont{institute}{size=\small}
+
+% Define additional colours
+\definecolor{oxfordblue}{RGB}{0,33,71}
+\definecolor{oxfordmauve}{RGB}{119,104,133}
+\definecolor{oxfordpeach}{RGB}{224,141,121}
+\definecolor{oxfordocean}{RGB}{120,158,158}
+\definecolor{glassgrey}{RGB}{220,220,220}
+
+% Set colour themes
+\setbeamercolor{title}{parent=oxfordblue}
+\setbeamercolor{title}{fg=oxfordblue}
+\setbeamercolor{subtitle}{parent=oxfordblue}
+\setbeamercolor{author}{parent=glassgrey}
+\setbeamercolor{date}{parent=oxfordblue}
+\setbeamercolor{institute}{parent=oxfordblue}
+
+\setbeamercolor{section title}{parent=oxfordblue}
+\setbeamercolor{subsection title}{parent=oxfordblue}
+\setbeamercolor{frametitle}{parent=oxfordblue}
+\setbeamercolor{background canvas}{parent=oxfordblue}
+\setbeamercolor{structure}{fg=oxfordblue}
+
+\setbeamercolor{normal text}{fg=black!97}
+
+\setbeamercolor{footnote}{fg=black!97}
+\setbeamercolor{page number in head/foot}{fg=oxfordblue}
+
+% Configuration for listings package
+\lstset{
+  language=Python,
+  basicstyle=\ttfamily\tiny,
+  keywordstyle=\color{blue},
+  stringstyle=\color{red},
+  commentstyle=\color{gray},
+  showstringspaces=false,
+  % frame=single, % adds a frame around the code
+}
+
+% Generate pdf logos
+\pgfdeclareimage[width=1.0cm]{oxfordlogo}{Theme/Logos/oxford-logo.png}
+\pgfdeclareimage[width=0.9cm]{BIL-logo-light}{Theme/Logos/BIL-logo-light.png}
+\pgfdeclareimage[width=1.4cm]{OxfordLogoV3}{Theme/Logos/OxfordLogoV3.png}
+
+% Set shorthand commands
+\newcommand{\pybop}{\includegraphics[width=2cm]{Theme/Logos/Temp_Logo.png}}
+
+
+%% Title slide formatting %%
+\setbeamerfont{subtitle}{size=\tiny}
+\setbeamertemplate{title page}
+{
+   \begin{centering}
+       \vskip0.25em%
+     \begin{beamercolorbox}[sep=8pt,center]{title}
+       \color{white}
+       \usebeamerfont{title}\inserttitle\par%
+       \ifx\insertsubtitle\@empty%
+       \else%
+         \vskip0.25em%
+         {\usebeamerfont{subtitle}\usebeamercolor[fg]{subtitle}\insertsubtitle\par}%
+       \fi%     
+     \end{beamercolorbox}%
+    \vskip2.25em%
+     {\usebeamercolor[fg]{titlegraphic}\inserttitlegraphic\par}
+     \vskip1em\par
+     \begin{beamercolorbox}[sep=8pt,center]{author}
+       \color{white}\usebeamerfont{author}\insertauthor
+     \end{beamercolorbox}
+      \vspace{-10pt}
+     \begin{beamercolorbox}[sep=8pt,center]{institute}
+       \color{white}\usebeamerfont{institute}\insertinstitute
+     \end{beamercolorbox}
+     \begin{beamercolorbox}[sep=8pt,center]{date}
+       \color{white}\usebeamerfont{date}\insertdate
+     \end{beamercolorbox}\vskip0.5em
+   \end{centering}
+   \vfill
+}
+
+
+%% General slide formatting %%
+% Header
+\setbeamertemplate{headline}
+{%
+}
+
+% Title
+\setbeamertemplate{frametitle}
+{%
+    \begin{picture}(0,0)
+        \put(-8,-10){%
+            \normalsize\color{oxfordblue}\insertframetitle
+        }
+        \put(-7,-20){%
+            \tiny\color{oxfordblue}\insertframesubtitle
+        }
+        \put(0,-15){%
+            \rule{60pt}{0.2pt}
+        }
+        \put(356,-20){%
+            \includegraphics[width=2cm]{Theme/Logos/Temp_Logo.png}
+        }
+    \end{picture}
+    \vfill
+}
+
+% Footer
+\setbeamertemplate{footline}
+{%
+    \vfill
+    \begin{picture}(0,0)
+        \put(20,30){%
+            \rule{420pt}{0.2pt}
+        }
+        \put(20,12){%
+            \pgfuseimage{OxfordLogoV3}
+        }
+        \put(66,12){%
+            \pgfuseimage{BIL-logo-light}
+        }
+        \put(100,10){%
+            \includegraphics[width=1cm]{Theme/Logos/logo-farger.pdf}
+        }
+        \put(138,12){%
+            \includegraphics[width=1.8cm]{Theme/Logos/TFI_logo_final_CMYK.pdf}
+        }
+        
+        \put(437,14){%
+            \color{oxfordblue}{\small\insertframenumber}
+        }
+    \end{picture}%
+}

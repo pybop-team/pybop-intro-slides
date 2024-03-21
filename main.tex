@@ -1,0 +1,472 @@
+% \documentclass{beamer}
+% \input{Theme/Packages.tex}
+%% orignal author: Tim Hosgood: timhosgood@gmail.com %%
+%% BIL & 16:9 modification: Brady Planden %%
+
+\documentclass[aspectratio=169]{beamer} % Updates to 16:9 aspect
+
+\input{Theme/packages}
+\input{Theme/preamble}
+% To crop graphics, use: [trim={left bottom right top},clip]
+
+%% Title Information %%
+% \title[Short Title]{Long Title of Talk} % short title for footer
+% \author%
+% {%
+%     \sc{My Name}\\
+%       \textit{Guest Lecturer}
+% }
+% \institute%
+% {%
+%     \textit{Engineering Science}\\
+%     \textit{University of Oxford}
+% }
+% \date[Short Date]{Long Date, \\ \today} % short date for footer
+
+\title{1st Online Developer Meeting}
+\titlegraphic{\includegraphics[width=6cm]{Theme/Logos/Draft_Logo.png} \\
+\hspace{3cm}\color{gray}\scriptsize(Pending new logo)}
+\author{The PyBOP Team \texorpdfstring{\href{https://github.com/pybop-team/PyBOP}{\faGithub}}{}}
+\institute{}
+\date{\today}
+
+\begin{document}
+
+{\setbeamertemplate{footline}{} 
+\usebackgroundtemplate{\includegraphics[width=\paperwidth]{Theme/blue_background.png}}%
+\frame{\titlepage}}
+
+% \section*{Outline}
+% \begin{frame}{Outline}
+%     \vspace{-12mm}
+%     \tableofcontents
+% \end{frame}
+
+\begin{frame}[plain]
+    \centering
+    \begin{beamercolorbox}[sep=8pt,center,shadow=true,rounded=true]{title}
+    \usebeamerfont{title}{Agenda}\par%
+    \color{oxfordblue}\noindent\rule{10cm}{1pt} \\
+    \LARGE{\faFileTextO} \\
+    \vspace{6mm} \normalsize
+    \begin{itemize}
+        \item Presentation on current version of PyBOP (Nicola, 15 min)
+        \item Quick introduction from everyone (5 min)
+        \item Discussion of open issues (30 min)
+        \item Planning and assignment of tasks (10 min)
+    \end{itemize}
+    \end{beamercolorbox}
+\end{frame}
+  
+\section{Introduction}
+\begin{frame}[plain]
+    \centering
+    \begin{beamercolorbox}[sep=8pt,center,shadow=true,rounded=true]{title}
+    \usebeamerfont{title}\insertsectionhead\par%
+    \color{oxfordblue}\noindent\rule{10cm}{1pt} \\
+    \LARGE{\faBatteryThreeQuarters} \\
+    \end{beamercolorbox}
+    \vspace{6mm} \normalsize
+    \begin{flushleft}
+        With thanks to:
+    \end{flushleft}
+    \begin{itemize}
+        \item the PyBaMM developers \href{https://github.com/pybop-team/PyBOP}{\includegraphics[height=1.2em]{Theme/Logos/PyBaMM_logo.png}}
+        \item the PINTS developers \href{https://github.com/pints-team/pints}{\faGithub}
+    \end{itemize}
+\end{frame}
+
+
+\begin{frame}{Aims}
+    \vspace{-6mm}
+    \begin{figure}
+        \centering
+        \includegraphics[width=\textwidth]{Images/ProblemTypes.png}
+    \end{figure}
+\end{frame}
+
+\begin{frame}{Architecture}
+    \vspace{-6mm}
+    \begin{figure}
+        \centering
+        \includegraphics[width=0.9\textwidth]{Images/pybop_architecture.png}
+        % \caption{Caption}
+        \label{fig:architecture}
+    \end{figure}
+\end{frame}
+
+\begin{frame}{Python objects}
+    \vspace{-6mm}
+    \begin{figure}
+        \centering
+        \includegraphics[width=0.95\textwidth, trim={0 10cm 0 0},clip]{Images/pybop_objects.png}
+        % \caption{Caption}
+        \label{fig:objects}
+    \end{figure}
+\end{frame}
+
+
+\section{Demo/examples}
+\begin{frame}[plain]
+    \centering
+    \begin{beamercolorbox}[sep=8pt,center,shadow=true,rounded=true]{title}
+    \usebeamerfont{title}\insertsectionhead\par%
+    \color{oxfordblue}\noindent\rule{10cm}{1pt} \\
+    \LARGE{\faFileCodeO} \\
+    \normalsize
+    \begin{itemize}
+        \item Parameterisation
+        \item Design optimisation
+    \end{itemize}
+    \end{beamercolorbox}
+\end{frame}
+
+\subsection{Parameterisation example}
+\begin{frame}[fragile,t]{Parameterisation}
+    \vspace{-0.5cm}
+    \begin{block}{1. Define a model (PyBaMM's SPM) and fitting parameters}
+    \begin{lstlisting}[firstnumber=1, xleftmargin=10pt]
+import pybop
+import numpy as np
+
+# Define model
+parameter_set = pybop.ParameterSet.pybamm("Chen2020")
+model = pybop.lithium_ion.SPM(parameter_set=parameter_set)
+
+# Fitting parameters
+parameters = [
+    pybop.Parameter(
+        "Negative particle radius [m]",
+        prior=pybop.Gaussian(6e-06, 0.1e-6),
+        bounds=[1e-6, 9e-6],
+    ),
+    pybop.Parameter(
+        "Positive particle radius [m]",
+        prior=pybop.Gaussian(4.5e-06, 0.1e-6),
+        bounds=[1e-6, 9e-6],
+    ),
+]
+    \end{lstlisting}
+    \end{block}
+\end{frame}
+
+\subsection{Parameterisation example}
+\begin{frame}[fragile,t]{Parameterisation}
+    \vspace{-0.5cm}
+    \begin{block}{2. Generate synthetic data and define problem, cost and optimisation}
+    \begin{lstlisting}[firstnumber=1, xleftmargin=10pt]
+# Generate data
+sigma = 0.001
+t_eval = np.arange(0, 900, 2)
+values = model.predict(t_eval=t_eval)
+corrupt_values = values["Voltage [V]"].data + np.random.normal(0, sigma, len(t_eval))
+
+# Form dataset
+dataset = pybop.Dataset(
+    {
+        "Time [s]": t_eval,
+        "Current function [A]": values["Current [A]"].data,
+        "Voltage [V]": corrupt_values,
+    }
+)
+
+# Generate problem, cost function, and optimisation class
+problem = pybop.FittingProblem(model, parameters, dataset)
+cost = pybop.SumSquaredError(problem)
+optim = pybop.Optimisation(cost, optimiser=pybop.CMAES)
+optim.set_max_iterations(100)
+    \end{lstlisting}
+    \end{block}
+\end{frame}
+
+\subsection{Parameterisation example}
+\begin{frame}[fragile,t]{Parameterisation}
+    \vspace{-1.5cm}
+    \begin{block}{3. Run the optimisation and plot the results}
+    \begin{lstlisting}[firstnumber=1, xleftmargin=10pt]
+# Run the optimisation
+x, final_cost = optim.run()
+print("True parameters:", true_x)
+print("Estimated parameters:", x)
+
+# Plot the timeseries output
+pybop.quick_plot(problem, parameter_values=x, title="Optimised Comparison")
+
+# Plot convergence and parameter traces
+pybop.plot_convergence(optim)
+
+# Plot the parameter traces
+pybop.plot_parameters(optim)
+
+# Plot the cost landscape with optimisation path
+pybop.plot2d(optim, steps=15)
+    \end{lstlisting}
+    \end{block}
+\end{frame}
+
+\begin{frame}{Parameterisation results}
+    \vspace{-6mm}
+    \begin{figure}
+        \centering
+        \includegraphics[width=0.4\textwidth, trim={0 0 0 0},clip]{Images/CMAES_quick_plot.png}
+        \includegraphics[width=0.4\textwidth, trim={0 0 0 0},clip]{Images/CMAES_convergence.png} \\
+        \includegraphics[width=0.5\textwidth, trim={0 0 0 0},clip]{Images/CMAES_parameters.png}
+        \hspace{1cm}\includegraphics[width=0.29\textwidth, trim={0 0 0 0},clip]{Images/CMAES_cost_trace.png}
+        \hspace{1cm}
+        \label{fig:parameterisation}
+    \end{figure}
+\end{frame}
+
+\subsection{Design optimisation example}
+\begin{frame}[fragile,t]{Design optimisation}
+    \vspace{-1.5cm}
+    \begin{block}{1. Define a model (PyBaMM's SPMe) and design parameters}
+    \begin{lstlisting}[firstnumber=1, xleftmargin=10pt]
+# Define parameter set and model
+parameter_set = pybop.ParameterSet.pybamm("Chen2020")
+model = pybop.lithium_ion.SPMe(parameter_set=parameter_set)
+
+# Fitting parameters
+parameters = [
+    pybop.Parameter(
+        "Positive electrode thickness [m]",
+        prior=pybop.Gaussian(7.56e-05, 0.05e-05),
+        bounds=[65e-06, 10e-05],
+    ),
+    pybop.Parameter(
+        "Positive particle radius [m]",
+        prior=pybop.Gaussian(5.22e-06, 0.05e-06),
+        bounds=[2e-06, 9e-06],
+    ),
+]
+    \end{lstlisting}
+    \end{block}
+\end{frame}
+
+\begin{frame}[fragile,t]{Design optimisation}
+    \vspace{-1cm}
+    \begin{block}{2. Set the target experiment and define problem, cost and optimisation}
+    \begin{lstlisting}[firstnumber=1, xleftmargin=10pt]
+# Define test protocol
+experiment = pybop.Experiment(
+    ["Discharge at 1C until 2.5 V (5 seconds period)"],
+)
+init_soc = 1  # start from full charge
+signal = ["Voltage [V]", "Current [A]"]
+
+# Generate problem
+problem = pybop.DesignProblem(
+    model, parameters, experiment, signal=signal, init_soc=init_soc
+)
+
+# Generate cost function and optimisation class:
+cost = pybop.GravimetricEnergyDensity(problem)
+optim = pybop.Optimisation(
+    cost, optimiser=pybop.PSO, verbose=True, allow_infeasible_solutions=False
+)
+optim.set_max_iterations(15)
+    \end{lstlisting}
+    \end{block}
+\end{frame}
+
+\begin{frame}[fragile,t]{Design optimisation}
+    \vspace{-2cm}
+    \begin{block}{3. Run the optimisation and plot the results}
+    \begin{lstlisting}[firstnumber=1, xleftmargin=10pt]
+# Run optimisation
+x, final_cost = optim.run()
+print("Estimated parameters:", x)
+print(f"Initial gravimetric energy density: {-cost(cost.x0):.2f} Wh.kg-1")
+print(f"Optimised gravimetric energy density: {-final_cost:.2f} Wh.kg-1")
+
+# Plot the timeseries output
+if cost.update_capacity:
+    cost.problem._model.approximate_capacity(x)
+pybop.quick_plot(problem, parameter_values=x, title="Optimised Comparison")
+
+# Plot the cost landscape with optimisation path
+pybop.plot2d(optim, steps=3)
+    \end{lstlisting}
+    \end{block}
+\end{frame}
+
+\begin{frame}[fragile,t]{Design optimisation}
+    \vspace{-6mm}
+    \begin{block}{Output}
+    \begin{lstlisting}[firstnumber=1, xleftmargin=10pt]
+Estimated parameters: [6.51159429e-05 2.32340723e-06]
+Initial gravimetric energy density: 386.31 Wh.kg-1
+Optimised gravimetric energy density: 410.78 Wh.kg-1
+    \end{lstlisting}
+    \end{block}
+    Results
+    \vspace{-3mm}
+    \begin{figure}
+        \centering
+        \includegraphics[width=0.59\textwidth, trim={0 0 0 0},clip]{Images/MaxEnergy_quick_plot.png}
+        \includegraphics[width=0.29\textwidth, trim={0 0 0 0},clip]{Images/MaxEnergy_cost_trace.png} \\
+        \label{fig:design_optimisation}
+    \end{figure}
+\end{frame}
+
+
+\section{Choice of optimisers}
+\begin{frame}[plain]
+    \centering
+    \begin{beamercolorbox}[sep=8pt,center,shadow=true,rounded=true]{title}
+    \usebeamerfont{title}\insertsectionhead\par%
+    \color{oxfordblue}\noindent\rule{10cm}{1pt} \\
+    \LARGE{\faBalanceScale} \\
+    \end{beamercolorbox}
+\end{frame}
+
+\subsection{Gradient-based optimisers}
+\begin{frame}{Gradient-based}
+    \vspace{-6mm}
+    \begin{table}[]
+        \centering
+        \footnotesize
+    \begin{tabularx}{0.86\textwidth}{*{3}{Y}}
+         Gradient descent &
+         Adaptive moment (ADAM) &
+         Resilient backpropagation (IRPropMin)
+    \end{tabularx}
+    \end{table}
+
+    \vspace{-6mm}
+    \begin{figure}
+        \centering
+        \includegraphics[width=0.24\textwidth]{Images/Optimisers/graddesc_cost.png}
+        \includegraphics[width=0.24\textwidth]{Images/Optimisers/adam_cost.png}
+        \includegraphics[width=0.24\textwidth]{Images/Optimisers/irpropmin_cost.png} ~~~\\
+        \includegraphics[width=0.24\textwidth]{Images/Optimisers/graddesc_params.png}
+        \includegraphics[width=0.24\textwidth]{Images/Optimisers/adam_params.png}
+        \includegraphics[width=0.24\textwidth]{Images/Optimisers/irpropmin_params.png}
+        % \caption{Caption}
+        \label{fig:optimisers1}
+    \end{figure}
+\end{frame}
+
+\subsection{Non-gradient-based optimisers}
+\begin{frame}{Evolution strategies}
+    \vspace{-5mm}
+    \begin{table}[]
+        \centering
+        \footnotesize
+    \begin{tabularx}{0.86\textwidth}{*{3}{Y}}
+         Stochastic natural evolution strategy (SNES) &
+         Exponential natural evolution strategy (SNES) &
+         Covariance matrix adaptation (CMA-ES)
+    \end{tabularx}
+    \end{table}
+
+    \vspace{-5mm}
+    \begin{figure}
+        \centering
+        \includegraphics[width=0.24\textwidth]{Images/Optimisers/snes_cost.png}
+        \includegraphics[width=0.24\textwidth]{Images/Optimisers/xnes_cost.png}
+        \includegraphics[width=0.24\textwidth]{Images/Optimisers/cmaes_cost.png} ~~~\\
+        \includegraphics[width=0.24\textwidth]{Images/Optimisers/snes_params.png}
+        \includegraphics[width=0.24\textwidth]{Images/Optimisers/xnes_params.png}
+        \includegraphics[width=0.24\textwidth]{Images/Optimisers/cmaes_params.png}
+        % \caption{Caption}
+        \label{fig:optimisers4}
+    \end{figure}
+\end{frame}
+
+\begin{frame}{Other optimisers}
+    \vspace{-6mm}
+    \begin{table}[]
+        \centering
+        \footnotesize
+    \begin{tabularx}{\textwidth}{*{4}{Y}}
+         Bound quadratic approx. (BOBYQA) &
+         Particle swarm optimisation &
+         SciPy differential evolution &
+         SciPy minimise (COBYLA)
+    \end{tabularx}
+    \end{table}
+
+    \vspace{-6mm}
+    \begin{figure}
+        \centering
+        \includegraphics[width=0.24\textwidth]{Images/Optimisers/nlopt_cost.png}
+        \includegraphics[width=0.24\textwidth]{Images/Optimisers/pso_cost.png}
+        \includegraphics[width=0.24\textwidth]{Images/Optimisers/scipyde_cost.png}
+        \includegraphics[width=0.24\textwidth]{Images/Optimisers/nlopt_cost.png} ~~~~\\
+        \includegraphics[width=0.24\textwidth]{Images/Optimisers/nlopt_params.png}
+        \includegraphics[width=0.24\textwidth]{Images/Optimisers/pso_params.png}
+        \includegraphics[width=0.24\textwidth]{Images/Optimisers/scipyde_params.png}
+        \includegraphics[width=0.24\textwidth]{Images/Optimisers/nlopt_params.png}
+        \label{fig:optimisers2}
+    \end{figure}
+\end{frame}
+
+\begin{frame}[plain]
+    \centering
+    \begin{beamercolorbox}[sep=8pt,center,shadow=true,rounded=true]{title}
+    \usebeamerfont{title}{Questions?}\par%
+    \color{oxfordblue}\noindent\rule{10cm}{1pt} \\
+    \end{beamercolorbox}
+\end{frame}
+
+
+\section{Discussion}
+
+\begin{frame}[plain]
+    \centering
+    \begin{beamercolorbox}[sep=8pt,center,shadow=true,rounded=true]{title}
+    \usebeamerfont{title}{Discussion}\par%
+    \color{oxfordblue}\noindent\rule{10cm}{1pt} \\
+    \LARGE{\faUserPlus} \\
+    \vspace{6mm} \normalsize
+    \begin{flushleft}
+        Let's introduce everyone:
+    \end{flushleft}
+    \begin{itemize}
+        \item Where are you joining from?
+        \item What is your research area of interest?
+        \item How would you like to use/contribute to PyBOP?
+    \end{itemize}
+    \end{beamercolorbox}
+\end{frame}
+
+\begin{frame}{Collaboration}
+    \vspace{-6mm}
+    \begin{figure}
+        \centering
+        \includegraphics[width=\textwidth]{Images/Code_of_Conduct.png}
+    \end{figure}
+\end{frame}
+
+\begin{frame}[plain]
+    \centering
+    \begin{beamercolorbox}[sep=8pt,center,shadow=true,rounded=true]{title}
+    \usebeamerfont{title}{Open issues}\par%
+    \color{oxfordblue}\noindent\rule{10cm}{1pt} \\
+    \LARGE{\faBug} \\
+    \vspace{6mm} \normalsize
+    \href{https://github.com/pybop-team/PyBOP/issues}{https://github.com/pybop-team/PyBOP/issues}
+    \end{beamercolorbox}
+\end{frame}
+
+
+\section{Next steps}
+\begin{frame}[plain]
+    \centering
+    \begin{beamercolorbox}[sep=8pt,center,shadow=true,rounded=true]{title}
+    \usebeamerfont{title}{Next steps}\par%
+    \color{oxfordblue}\noindent\rule{10cm}{1pt} \\
+    \LARGE{\faCalendarPlusO} \\
+    \normalsize
+    \vspace{1em}
+    \begin{itemize}
+        \item How can you contribute?
+        \item Project board: \href{https://github.com/orgs/pybop-team/projects/6/views/1}{https://github.com/orgs/pybop-team/projects/6/views/1}
+        \item Date for next meeting
+    \end{itemize}
+    \end{beamercolorbox}
+\end{frame}
+
+\end{document}
+
