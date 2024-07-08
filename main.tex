@@ -3,29 +3,15 @@
 %% orignal author: Tim Hosgood: timhosgood@gmail.com %%
 %% BIL & 16:9 modification: Brady Planden %%
 
-\documentclass[aspectratio=169]{beamer} % Updates to 16:9 aspect
+\documentclass[aspectratio=169]{beamer}
 
 \input{Theme/packages}
 \input{Theme/preamble}
 % To crop graphics, use: [trim={left bottom right top},clip]
+% Icons can be found at: https://anorien.csc.warwick.ac.uk/mirrors/CTAN/fonts/fontawesome/doc/fontawesome.pdf
 
-%% Title Information %%
-% \title[Short Title]{Long Title of Talk} % short title for footer
-% \author%
-% {%
-%     \sc{My Name}\\
-%       \textit{Guest Lecturer}
-% }
-% \institute%
-% {%
-%     \textit{Engineering Science}\\
-%     \textit{University of Oxford}
-% }
-% \date[Short Date]{Long Date, \\ \today} % short date for footer
-
-\title{1st Online Developer Meeting}
-\titlegraphic{\includegraphics[width=6cm]{Theme/Logos/Draft_Logo.png} \\
-\hspace{3cm}\color{gray}\scriptsize(Pending new logo)}
+\title{3rd Online Developer Meeting}
+\titlegraphic{\includegraphics[width=6cm]{Theme/Logos/PyBOP_logo.png}}
 \author{The PyBOP Team \texorpdfstring{\href{https://github.com/pybop-team/PyBOP}{\faGithub}}{}}
 \institute{}
 \date{\today}
@@ -50,14 +36,101 @@
     \LARGE{\faFileTextO} \\
     \vspace{6mm} \normalsize
     \begin{itemize}
-        \item Presentation on current version of PyBOP (Nicola, 15 min)
-        \item Quick introduction from everyone (5 min)
+        \item Presentation on recent updates to PyBOP (Nicola, 10 min)
+        \item Quick introduction/update from everyone (5 min)
         \item Discussion of open issues (30 min)
-        \item Planning and assignment of tasks (10 min)
+        \item Planning and assignment of tasks (15 min)
     \end{itemize}
     \end{beamercolorbox}
+    Introductory slides are available at the end of this presentation.
 \end{frame}
-  
+
+\begin{frame}{PyBOP project map}
+    \vspace{-6mm}
+    \begin{figure}
+        \centering
+        \includegraphics[height=0.42\textwidth]{Images/Diagrams/PyBOP-high-level.png}
+        \label{fig:project_map}
+    \end{figure}
+\end{frame}
+
+\section{Updates}
+
+\begin{frame}[plain]
+    \centering
+    \begin{beamercolorbox}[sep=8pt,center,shadow=true,rounded=true]{title}
+    \usebeamerfont{title}{Recent updates}\par%
+    \color{oxfordblue}\noindent\rule{10cm}{1pt} \\
+    \LARGE{\faCloudUpload} \\
+    \vspace{6mm} \normalsize
+    We released PyBOP v24.6 on 8th July. \\
+    \vspace{6mm}
+    \href{https://github.com/pybop-team/PyBOP/blob/develop/CHANGELOG.md}{https://github.com/pybop-team/PyBOP/blob/develop/CHANGELOG.md} \\
+    \vspace{6mm}
+    The Changelog is divided into new \textbf{features},  \textbf{bug fixes} and \textbf{breaking changes}.
+    \end{beamercolorbox}
+\end{frame}
+
+\begin{frame}[fragile,t]{New in v24.6: Feature highlight}
+    \vspace{-6mm}
+    % \issue{241} - Adds experimental circuit model fitting notebook with LG M50 data from: \href{https://github.com/WDWidanage/Simscape-Battery-Library/tree/main/Examples/parameterEstimation_TECMD/Data}{https://github.com/WDWidanage/Simscape-Battery-Library/tree/main/Examples/parameterEstimation\_TECMD/Data}
+    % \begin{figure}
+    %     \centering
+    %     \includegraphics[height=0.3\textwidth]{Images/Highlights/LGM50_Fig1.png}
+    %     \includegraphics[height=0.3\textwidth]{Images/Highlights/LGM50_Fig2.png}
+    %     \label{fig:LGM50}
+    % \end{figure}
+\end{frame}
+
+\begin{frame}[plain]
+    \centering
+    \begin{beamercolorbox}[sep=8pt,center,shadow=true,rounded=true]{title}
+    \usebeamerfont{title}{Questions?}\par%
+    \color{oxfordblue}\noindent\rule{10cm}{1pt} \\
+    \end{beamercolorbox}
+\end{frame}
+
+\section{Discussion}
+
+\begin{frame}[plain]
+    \centering
+    \begin{beamercolorbox}[sep=8pt,center,shadow=true,rounded=true]{title}
+    \usebeamerfont{title}{Discussion of open issues}\par%
+    \color{oxfordblue}\noindent\rule{10cm}{1pt} \\
+    \LARGE{\faUserPlus} \LARGE{\faBug} \\
+    \normalsize
+    \begin{flushleft}
+        Let's introduce everyone:
+    \end{flushleft}
+    \begin{itemize}
+        \item Where are you joining from?
+        \item What issue are you working on/would you like to work on?
+    \end{itemize}
+    \vspace{6mm} \normalsize
+    Open issues: \href{https://github.com/pybop-team/PyBOP/issues}{https://github.com/pybop-team/PyBOP/issues} \\
+    Project board: \href{https://github.com/orgs/pybop-team/projects/7}{https://github.com/orgs/pybop-team/projects/7}
+    \end{beamercolorbox}
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%
+%%%% INTRODUCTION %%%%
+%%%%%%%%%%%%%%%%%%%%%%
+
+{
+\usebackgroundtemplate{\includegraphics[width=\paperwidth]{Theme/blue_background.png}}%
+\begin{frame}[plain]
+    \centering
+    \begin{beamercolorbox}[sep=8pt,center,shadow=true,rounded=true]{title}
+    {\color{white}\usebeamerfont{title}{End of meeting}\par}%
+    \color{white}\noindent\rule{10cm}{1pt} \\
+    {\color{white}\usebeamerfont{title}{Below: \\
+    1. Introductory slides \\
+    2. Feature highlights }\par}%
+    \end{beamercolorbox}
+\end{frame}
+}
+
 \section{Introduction}
 \begin{frame}[plain]
     \centering
@@ -81,7 +154,7 @@
     \vspace{-6mm}
     \begin{figure}
         \centering
-        \includegraphics[width=\textwidth]{Images/ProblemTypes.png}
+        \includegraphics[width=\textwidth]{Images/Diagrams/ProblemTypes.png}
     \end{figure}
 \end{frame}
 
@@ -89,7 +162,7 @@
     \vspace{-6mm}
     \begin{figure}
         \centering
-        \includegraphics[width=0.9\textwidth]{Images/pybop_architecture.png}
+        \includegraphics[width=0.9\textwidth]{Images/Diagrams/pybop_architecture.png}
         % \caption{Caption}
         \label{fig:architecture}
     \end{figure}
@@ -99,7 +172,7 @@
     \vspace{-6mm}
     \begin{figure}
         \centering
-        \includegraphics[width=0.95\textwidth, trim={0 10cm 0 0},clip]{Images/pybop_objects.png}
+        \includegraphics[width=0.95\textwidth, trim={0 10cm 0 0},clip]{Images/Diagrams/pybop_objects.png}
         % \caption{Caption}
         \label{fig:objects}
     \end{figure}
@@ -134,7 +207,7 @@ parameter_set = pybop.ParameterSet.pybamm("Chen2020")
 model = pybop.lithium_ion.SPM(parameter_set=parameter_set)
 
 # Fitting parameters
-parameters = [
+parameters = pybop.Parameters(
     pybop.Parameter(
         "Negative particle radius [m]",
         prior=pybop.Gaussian(6e-06, 0.1e-6),
@@ -145,7 +218,7 @@ parameters = [
         prior=pybop.Gaussian(4.5e-06, 0.1e-6),
         bounds=[1e-6, 9e-6],
     ),
-]
+)
     \end{lstlisting}
     \end{block}
 \end{frame}
@@ -157,7 +230,7 @@ parameters = [
     \begin{lstlisting}[firstnumber=1, xleftmargin=10pt]
 # Generate data
 sigma = 0.001
-t_eval = np.arange(0, 900, 2)
+t_eval = np.arange(0, 900, 3)
 values = model.predict(t_eval=t_eval)
 corrupt_values = values["Voltage [V]"].data + np.random.normal(0, sigma, len(t_eval))
 
@@ -173,8 +246,7 @@ dataset = pybop.Dataset(
 # Generate problem, cost function, and optimisation class
 problem = pybop.FittingProblem(model, parameters, dataset)
 cost = pybop.SumSquaredError(problem)
-optim = pybop.Optimisation(cost, optimiser=pybop.CMAES)
-optim.set_max_iterations(100)
+optim = pybop.CMAES(cost, max_iterations=100)
     \end{lstlisting}
     \end{block}
 \end{frame}
@@ -186,11 +258,11 @@ optim.set_max_iterations(100)
     \begin{lstlisting}[firstnumber=1, xleftmargin=10pt]
 # Run the optimisation
 x, final_cost = optim.run()
-print("True parameters:", true_x)
+print("True parameters:", parameters.true_value())
 print("Estimated parameters:", x)
 
 # Plot the timeseries output
-pybop.quick_plot(problem, parameter_values=x, title="Optimised Comparison")
+pybop.quick_plot(problem, problem_inputs=x, title="Optimised Comparison")
 
 # Plot convergence and parameter traces
 pybop.plot_convergence(optim)
@@ -208,10 +280,10 @@ pybop.plot2d(optim, steps=15)
     \vspace{-6mm}
     \begin{figure}
         \centering
-        \includegraphics[width=0.4\textwidth, trim={0 0 0 0},clip]{Images/CMAES_quick_plot.png}
-        \includegraphics[width=0.4\textwidth, trim={0 0 0 0},clip]{Images/CMAES_convergence.png} \\
-        \includegraphics[width=0.5\textwidth, trim={0 0 0 0},clip]{Images/CMAES_parameters.png}
-        \hspace{1cm}\includegraphics[width=0.29\textwidth, trim={0 0 0 0},clip]{Images/CMAES_cost_trace.png}
+        \includegraphics[width=0.4\textwidth, trim={0 0 0 0},clip]{Images/Examples/CMAES_quick_plot.png}
+        \includegraphics[width=0.4\textwidth, trim={0 0 0 0},clip]{Images/Examples/CMAES_convergence.png} \\
+        \includegraphics[width=0.5\textwidth, trim={0 0 0 0},clip]{Images/Examples/CMAES_parameters.png}
+        \hspace{1cm}\includegraphics[width=0.29\textwidth, trim={0 0 0 0},clip]{Images/Examples/CMAES_cost_trace.png}
         \hspace{1cm}
         \label{fig:parameterisation}
     \end{figure}
@@ -222,12 +294,15 @@ pybop.plot2d(optim, steps=15)
     \vspace{-1.5cm}
     \begin{block}{1. Define a model (PyBaMM's SPMe) and design parameters}
     \begin{lstlisting}[firstnumber=1, xleftmargin=10pt]
+import pybop
+import numpy as np
+
 # Define parameter set and model
-parameter_set = pybop.ParameterSet.pybamm("Chen2020")
+parameter_set = pybop.ParameterSet.pybamm("Chen2020", formation_concentrations=True)
 model = pybop.lithium_ion.SPMe(parameter_set=parameter_set)
 
 # Fitting parameters
-parameters = [
+parameters = pybop.Parameters(
     pybop.Parameter(
         "Positive electrode thickness [m]",
         prior=pybop.Gaussian(7.56e-05, 0.05e-05),
@@ -238,7 +313,7 @@ parameters = [
         prior=pybop.Gaussian(5.22e-06, 0.05e-06),
         bounds=[2e-06, 9e-06],
     ),
-]
+)
     \end{lstlisting}
     \end{block}
 \end{frame}
@@ -260,11 +335,10 @@ problem = pybop.DesignProblem(
 )
 
 # Generate cost function and optimisation class:
-cost = pybop.GravimetricEnergyDensity(problem)
-optim = pybop.Optimisation(
-    cost, optimiser=pybop.PSO, verbose=True, allow_infeasible_solutions=False
+cost = pybop.GravimetricEnergyDensity(problem, update_capacity=True)
+optim = pybop.PSO(
+    cost, verbose=True, allow_infeasible_solutions=False, max_iterations=15
 )
-optim.set_max_iterations(15)
     \end{lstlisting}
     \end{block}
 \end{frame}
@@ -276,16 +350,16 @@ optim.set_max_iterations(15)
 # Run optimisation
 x, final_cost = optim.run()
 print("Estimated parameters:", x)
-print(f"Initial gravimetric energy density: {-cost(cost.x0):.2f} Wh.kg-1")
-print(f"Optimised gravimetric energy density: {-final_cost:.2f} Wh.kg-1")
+print(f"Initial gravimetric energy density: {cost(optim.x0):.2f} Wh.kg-1")
+print(f"Optimised gravimetric energy density: {final_cost:.2f} Wh.kg-1")
 
 # Plot the timeseries output
 if cost.update_capacity:
-    cost.problem._model.approximate_capacity(x)
-pybop.quick_plot(problem, parameter_values=x, title="Optimised Comparison")
+    problem._model.approximate_capacity(x)
+pybop.quick_plot(problem, problem_inputs=x, title="Optimised Comparison")
 
 # Plot the cost landscape with optimisation path
-pybop.plot2d(optim, steps=3)
+pybop.plot2d(optim, steps=10)
     \end{lstlisting}
     \end{block}
 \end{frame}
@@ -303,8 +377,8 @@ Optimised gravimetric energy density: 410.78 Wh.kg-1
     \vspace{-3mm}
     \begin{figure}
         \centering
-        \includegraphics[width=0.59\textwidth, trim={0 0 0 0},clip]{Images/MaxEnergy_quick_plot.png}
-        \includegraphics[width=0.29\textwidth, trim={0 0 0 0},clip]{Images/MaxEnergy_cost_trace.png} \\
+        \includegraphics[width=0.59\textwidth, trim={0 0 0 0},clip]{Images/Examples/MaxEnergy_quick_plot.png}
+        \includegraphics[width=0.29\textwidth, trim={0 0 0 0},clip]{Images/Examples/MaxEnergy_cost_trace.png} \\
         \label{fig:design_optimisation}
     \end{figure}
 \end{frame}
@@ -328,7 +402,7 @@ Optimised gravimetric energy density: 410.78 Wh.kg-1
         \footnotesize
     \begin{tabularx}{0.86\textwidth}{*{3}{Y}}
          Gradient descent &
-         Adaptive moment (ADAM) &
+         Adaptive moment (AdamW) &
          Resilient backpropagation (IRPropMin)
     \end{tabularx}
     \end{table}
@@ -337,10 +411,10 @@ Optimised gravimetric energy density: 410.78 Wh.kg-1
     \begin{figure}
         \centering
         \includegraphics[width=0.24\textwidth]{Images/Optimisers/graddesc_cost.png}
-        \includegraphics[width=0.24\textwidth]{Images/Optimisers/adam_cost.png}
+        \includegraphics[width=0.24\textwidth]{Images/Optimisers/adamw_cost.png}
         \includegraphics[width=0.24\textwidth]{Images/Optimisers/irpropmin_cost.png} ~~~\\
         \includegraphics[width=0.24\textwidth]{Images/Optimisers/graddesc_params.png}
-        \includegraphics[width=0.24\textwidth]{Images/Optimisers/adam_params.png}
+        \includegraphics[width=0.24\textwidth]{Images/Optimisers/adamw_params.png}
         \includegraphics[width=0.24\textwidth]{Images/Optimisers/irpropmin_params.png}
         % \caption{Caption}
         \label{fig:optimisers1}
@@ -380,55 +454,23 @@ Optimised gravimetric energy density: 410.78 Wh.kg-1
         \centering
         \footnotesize
     \begin{tabularx}{\textwidth}{*{4}{Y}}
-         Bound quadratic approx. (BOBYQA) &
+         Nelder Mead &
          Particle swarm optimisation &
-         SciPy differential evolution &
-         SciPy minimise (COBYLA)
+         SciPy differential evolution
     \end{tabularx}
     \end{table}
 
     \vspace{-6mm}
     \begin{figure}
         \centering
-        \includegraphics[width=0.24\textwidth]{Images/Optimisers/nlopt_cost.png}
+        \includegraphics[width=0.24\textwidth]{Images/Optimisers/neldermead_cost.png}
         \includegraphics[width=0.24\textwidth]{Images/Optimisers/pso_cost.png}
-        \includegraphics[width=0.24\textwidth]{Images/Optimisers/scipyde_cost.png}
-        \includegraphics[width=0.24\textwidth]{Images/Optimisers/nlopt_cost.png} ~~~~\\
-        \includegraphics[width=0.24\textwidth]{Images/Optimisers/nlopt_params.png}
+        \includegraphics[width=0.24\textwidth]{Images/Optimisers/scipyde_cost.png} ~~~~\\
+        \includegraphics[width=0.24\textwidth]{Images/Optimisers/neldermead_params.png}
         \includegraphics[width=0.24\textwidth]{Images/Optimisers/pso_params.png}
         \includegraphics[width=0.24\textwidth]{Images/Optimisers/scipyde_params.png}
-        \includegraphics[width=0.24\textwidth]{Images/Optimisers/nlopt_params.png}
         \label{fig:optimisers2}
     \end{figure}
-\end{frame}
-
-\begin{frame}[plain]
-    \centering
-    \begin{beamercolorbox}[sep=8pt,center,shadow=true,rounded=true]{title}
-    \usebeamerfont{title}{Questions?}\par%
-    \color{oxfordblue}\noindent\rule{10cm}{1pt} \\
-    \end{beamercolorbox}
-\end{frame}
-
-
-\section{Discussion}
-
-\begin{frame}[plain]
-    \centering
-    \begin{beamercolorbox}[sep=8pt,center,shadow=true,rounded=true]{title}
-    \usebeamerfont{title}{Discussion}\par%
-    \color{oxfordblue}\noindent\rule{10cm}{1pt} \\
-    \LARGE{\faUserPlus} \\
-    \vspace{6mm} \normalsize
-    \begin{flushleft}
-        Let's introduce everyone:
-    \end{flushleft}
-    \begin{itemize}
-        \item Where are you joining from?
-        \item What is your research area of interest?
-        \item How would you like to use/contribute to PyBOP?
-    \end{itemize}
-    \end{beamercolorbox}
 \end{frame}
 
 \begin{frame}{Collaboration}
@@ -439,33 +481,72 @@ Optimised gravimetric energy density: 410.78 Wh.kg-1
     \end{figure}
 \end{frame}
 
+\section{Feature highlights}
 \begin{frame}[plain]
     \centering
     \begin{beamercolorbox}[sep=8pt,center,shadow=true,rounded=true]{title}
-    \usebeamerfont{title}{Open issues}\par%
+    \usebeamerfont{title}\insertsectionhead\par%
     \color{oxfordblue}\noindent\rule{10cm}{1pt} \\
-    \LARGE{\faBug} \\
-    \vspace{6mm} \normalsize
-    \href{https://github.com/pybop-team/PyBOP/issues}{https://github.com/pybop-team/PyBOP/issues}
+    \LARGE{\faBatteryThreeQuarters} \\
     \end{beamercolorbox}
 \end{frame}
 
+\begin{frame}[fragile,t]{New in v24.6: Experimental data fitting}
+    \vspace{-6mm}
+    \issue{241} - Adds experimental circuit model fitting notebook with LG M50 data from: \href{https://github.com/WDWidanage/Simscape-Battery-Library/tree/main/Examples/parameterEstimation_TECMD/Data}{https://github.com/WDWidanage/Simscape-Battery-Library/tree/main/Examples/parameterEstimation\_TECMD/Data}
+    \begin{figure}
+        \centering
+        \includegraphics[height=0.3\textwidth]{Images/Highlights/LGM50_Fig1.png}
+        \includegraphics[height=0.3\textwidth]{Images/Highlights/LGM50_Fig2.png}
+        \label{fig:LGM50}
+    \end{figure}
+\end{frame}
 
-\section{Next steps}
-\begin{frame}[plain]
-    \centering
-    \begin{beamercolorbox}[sep=8pt,center,shadow=true,rounded=true]{title}
-    \usebeamerfont{title}{Next steps}\par%
-    \color{oxfordblue}\noindent\rule{10cm}{1pt} \\
-    \LARGE{\faCalendarPlusO} \\
-    \normalsize
-    \vspace{1em}
-    \begin{itemize}
-        \item How can you contribute?
-        \item Project board: \href{https://github.com/orgs/pybop-team/projects/6/views/1}{https://github.com/orgs/pybop-team/projects/6/views/1}
-        \item Date for next meeting
-    \end{itemize}
-    \end{beamercolorbox}
+\begin{frame}{New in v24.6: Additional PyBaMM models}
+    \vspace{-6mm}
+    \issue{250} - Adds DFN, MPM, MSMR models and moves multiple construction variables to BaseEChem. Adds exception catch on simulate \& simulateS1.
+    \begin{figure}
+        \centering
+        \includegraphics[height=0.35\textwidth]{Images/Diagrams/Supported_classes.png}
+        \label{fig:supported_classes}
+    \end{figure}
+\end{frame}
+
+\begin{frame}{New in v24.6: Maximum a Posteriori}
+    \vspace{-6mm}
+    \issue{275} - Adds Maximum a Posteriori (MAP) cost function with corresponding tests and example script.
+    \begin{figure}
+        \centering
+        \includegraphics[height=0.35\textwidth]{Images/Highlights/MAP_param_convergence.png}
+        \includegraphics[height=0.35\textwidth]{Images/Highlights/MAP_cost_landscape.png}
+        \label{fig:MAP_cost}
+    \end{figure}
+\end{frame}
+
+\begin{frame}[fragile,t]{New in v24.6: Testing and infrastructure}
+    \vspace{-6mm}
+    Credit and thanks to Agriya and Brady!
+    \begin{block}{Features}
+    \begin{lstlisting}[firstnumber=1, xleftmargin=10pt]
+#304 - Decreases the testing suite completion time.
+#301 - Updates default echem solver to "fast with events" mode.
+#251 - Increment PyBaMM > v23.5, remove redundant tests within integration tests, increment citation version, fix examples with incorrect model definitions.
+#285 - Drop support for Python 3.8.
+#268 - Fixes the GitHub Release artifact uploads, allowing verification of codesigned binaries and source distributions via sigstore-python.
+#79 - Adds BPX as a dependency and imports BPX support from PyBaMM.
+#267 - Add classifiers to pyproject.toml, update project.urls.
+#195 - Adds the Nelder-Mead optimiser from PINTS as another option.
+    \end{lstlisting}
+    \end{block}
+    \begin{block}{Bug Fixes}
+    \begin{lstlisting}[firstnumber=1, xleftmargin=10pt]
+#317 - Installs seed packages into nox sessions, ensuring that scheduled tests can pass.
+#308 - Enables testing on both macOS Intel and macOS ARM (Silicon) runners and fixes the scheduled tests.
+#299 - Bugfix multiprocessing support for Linux, MacOS, Windows (WSL) and improves coverage.
+#270 - Updates PR template.
+#91 - Adds a check on the number of parameters for CMAES and makes XNES the default optimiser.
+    \end{lstlisting}
+    \end{block}
 \end{frame}
 
 \end{document}
