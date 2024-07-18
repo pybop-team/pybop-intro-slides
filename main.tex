@@ -71,15 +71,58 @@
     \end{beamercolorbox}
 \end{frame}
 
-\begin{frame}[fragile,t]{New in v24.6: Feature highlight}
+\begin{frame}[fragile,t]{New in v24.6: Additional optimisers}
     \vspace{-6mm}
-    % \issue{241} - Adds experimental circuit model fitting notebook with LG M50 data from: \href{https://github.com/WDWidanage/Simscape-Battery-Library/tree/main/Examples/parameterEstimation_TECMD/Data}{https://github.com/WDWidanage/Simscape-Battery-Library/tree/main/Examples/parameterEstimation\_TECMD/Data}
-    % \begin{figure}
-    %     \centering
-    %     \includegraphics[height=0.3\textwidth]{Images/Highlights/LGM50_Fig1.png}
-    %     \includegraphics[height=0.3\textwidth]{Images/Highlights/LGM50_Fig2.png}
-    %     \label{fig:LGM50}
-    % \end{figure}
+    \issue{319} - Adds CuckooSearch optimiser with corresponding tests.
+    \issue{316} - Adds Adam with weight decay (AdamW), deprecates pints.Adam.
+
+    \begin{table}[]
+        \centering
+        \footnotesize
+    \begin{tabularx}{0.86\textwidth}{*{2}{Y}}
+         Adam with weight decay (AdamW) &
+         Cuckoo search
+    \end{tabularx}
+    \end{table}
+    \vspace{-6mm}
+    \begin{figure}
+        \centering
+        \includegraphics[width=0.2\textwidth]{Images/Optimisers/adamw_cost.png}
+        \includegraphics[width=0.28\textwidth]{Images/Optimisers/adamw_params.png} ~
+        \includegraphics[width=0.2\textwidth]{Images/Optimisers/cuckoo_cost.png}
+        \includegraphics[width=0.28\textwidth]{Images/Optimisers/cuckoo_params.png}
+        % \caption{Caption}
+        \label{fig:optimisersNew}
+    \end{figure}
+\end{frame}
+
+\begin{frame}[fragile,t]{New in v24.6: GITT fitting example}
+    \vspace{-6mm}
+    \issue{249} - Add WeppnerHuggins model and GITT example.
+
+    \begin{figure}
+        \centering
+        \includegraphics[width=0.5\textwidth]{Images/Highlights/gitt_IRPropMin_fit.png}
+        \includegraphics[width=0.48\textwidth]{Images/Highlights/gitt_IRPropMin_parameter.png}
+        % \caption{Caption}
+        \label{fig:WeppnerHuggins}
+    \end{figure}
+\end{frame}
+
+\begin{frame}[fragile,t]{New feature (WIP): Multi-fitting problem class}
+    \vspace{-6mm}
+    \issue{364} - Adds the MultiFittingProblem class and the multi\_fitting example script.
+    \issue{322} - Add Parameters class to store and access multiple parameters in one object.
+
+    \vspace{-2mm}
+    \begin{figure}
+        \centering
+        \includegraphics[width=0.3\textwidth]{Images/Highlights/multi_data_fitting.png}
+        \includegraphics[width=0.34\textwidth]{Images/Highlights/multi_cost.png}
+        \includegraphics[width=0.34\textwidth]{Images/Highlights/multi_parameters.png}
+        % \caption{Caption}
+        \label{fig:MultiFitting}
+    \end{figure}
 \end{frame}
 
 \begin{frame}[plain]
