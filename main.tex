@@ -10,9 +10,9 @@
 % To crop graphics, use: [trim={left bottom right top},clip]
 % Icons can be found at: https://anorien.csc.warwick.ac.uk/mirrors/CTAN/fonts/fontawesome/doc/fontawesome.pdf
 
-\title{3rd Online Developer Meeting}
+\title{4th Online Developer Meeting}
 \titlegraphic{\includegraphics[width=6cm]{Theme/Logos/PyBOP_logo.png}}
-\author{The PyBOP Team \texorpdfstring{\href{https://github.com/pybop-team/PyBOP}{\faGithub}}{}}
+\author{The PyBOP Team \texorpdfstring{\hypersetup{urlcolor=white}\href{https://github.com/pybop-team/PyBOP}{\faGithub}}{}}
 \institute{}
 \date{\today}
 
@@ -36,9 +36,9 @@
     \LARGE{\faFileTextO} \\
     \vspace{6mm} \normalsize
     \begin{itemize}
-        \item Presentation on recent updates to PyBOP (Nicola, 10 min)
-        \item Quick introduction/update from everyone (5 min)
-        \item Discussion of open issues (30 min)
+        \item Presentation on recent updates to PyBOP (10 min)
+        \item Quick update from everyone (10 min)
+        \item Discussion of open issues (20 min)
         \item Planning and assignment of tasks (15 min)
     \end{itemize}
     \end{beamercolorbox}
@@ -49,7 +49,7 @@
     \vspace{-6mm}
     \begin{figure}
         \centering
-        \includegraphics[height=0.42\textwidth]{Images/Diagrams/PyBOP-high-level.png}
+        \includegraphics[height=0.42\textwidth]{Images/Diagrams/PyBOP-high-level.pdf}
         \label{fig:project_map}
     \end{figure}
 \end{frame}
@@ -59,11 +59,11 @@
 \begin{frame}[plain]
     \centering
     \begin{beamercolorbox}[sep=8pt,center,shadow=true,rounded=true]{title}
-    \usebeamerfont{title}{Recent updates}\par%
+    \usebeamerfont{title}{Releases}\par%
     \color{oxfordblue}\noindent\rule{10cm}{1pt} \\
     \LARGE{\faCloudUpload} \\
     \vspace{6mm} \normalsize
-    We released PyBOP v24.6 on 8th July. \\
+    v24.9.1 was released on September 18th. \\
     \vspace{6mm}
     \href{https://github.com/pybop-team/PyBOP/blob/develop/CHANGELOG.md}{https://github.com/pybop-team/PyBOP/blob/develop/CHANGELOG.md} \\
     \vspace{6mm}
@@ -71,66 +71,83 @@
     \end{beamercolorbox}
 \end{frame}
 
-\begin{frame}[fragile,t]{New in v24.6: Additional optimisers}
+\begin{frame}[fragile,t]{New features that landed in v24.9}
     \vspace{-6mm}
-    \issue{319} - Adds CuckooSearch optimiser with corresponding tests.
-    \issue{316} - Adds Adam with weight decay (AdamW), deprecates pints.Adam.
+    \issue{462} - Adds Minkowski and SumofPower cost functions. \\
+    \issue{6} - Adds Monte Carlo Sampling classes
 
-    \begin{table}[]
-        \centering
-        \footnotesize
-    \begin{tabularx}{0.86\textwidth}{*{2}{Y}}
-         Adam with weight decay (AdamW) &
-         Cuckoo search
-    \end{tabularx}
-    \end{table}
-    \vspace{-6mm}
     \begin{figure}
         \centering
-        \includegraphics[width=0.2\textwidth]{Images/Optimisers/adamw_cost.png}
-        \includegraphics[width=0.28\textwidth]{Images/Optimisers/adamw_params.png} ~
-        \includegraphics[width=0.2\textwidth]{Images/Optimisers/cuckoo_cost.png}
-        \includegraphics[width=0.28\textwidth]{Images/Optimisers/cuckoo_params.png}
+        \includegraphics[width=0.5\textwidth]{Images/Highlights/minkowski-sum-of-power.png}
+        \hspace{1em}
+        \includegraphics[width=0.455\textwidth]{Images/Highlights/SPMe posterior.png}
         % \caption{Caption}
         \label{fig:optimisersNew}
     \end{figure}
 \end{frame}
 
-\begin{frame}[fragile,t]{New in v24.6: GITT fitting example}
+\begin{frame}[fragile,t]{New features that landed in v24.9}
     \vspace{-6mm}
-    \issue{249} - Add WeppnerHuggins model and GITT example.
+    \issue{353} - Allows user defined nonlinear constraints
 
     \begin{figure}
         \centering
-        \includegraphics[width=0.5\textwidth]{Images/Highlights/gitt_IRPropMin_fit.png}
-        \includegraphics[width=0.48\textwidth]{Images/Highlights/gitt_IRPropMin_parameter.png}
+        \includegraphics[width=0.37\textwidth]{Images/Highlights/trust-const-identification.png}
+        \hspace{3em}
+        \includegraphics[width=0.37\textwidth]{Images/Highlights/trust-const-convergence.png}
         % \caption{Caption}
         \label{fig:WeppnerHuggins}
     \end{figure}
 \end{frame}
 
-\begin{frame}[fragile,t]{New feature (WIP): Multi-fitting problem class}
+\begin{frame}[fragile,t]{New features that landed in v24.9}
     \vspace{-6mm}
-    \issue{364} - Adds the MultiFittingProblem class and the multi\_fitting example script.
-    \issue{322} - Add Parameters class to store and access multiple parameters in one object.
+        \issue{405} - Adds EIS prediction methods
 
-    \vspace{-2mm}
     \begin{figure}
         \centering
-        \includegraphics[width=0.3\textwidth]{Images/Highlights/multi_data_fitting.png}
-        \includegraphics[width=0.34\textwidth]{Images/Highlights/multi_cost.png}
-        \includegraphics[width=0.34\textwidth]{Images/Highlights/multi_parameters.png}
+        \includegraphics[width=0.35\textwidth]{Images/Highlights/nyquist-eis-identification.png}
+        \hspace{3em}
+        \includegraphics[width=0.37\textwidth]{Images/Highlights/eis-identification-landscape.png}
         % \caption{Caption}
-        \label{fig:MultiFitting}
+        \label{fig:WeppnerHuggins}
     \end{figure}
 \end{frame}
 
-\begin{frame}[plain]
-    \centering
-    \begin{beamercolorbox}[sep=8pt,center,shadow=true,rounded=true]{title}
-    \usebeamerfont{title}{Questions?}\par%
-    \color{oxfordblue}\noindent\rule{10cm}{1pt} \\
-    \end{beamercolorbox}
+\begin{frame}[fragile,t]
+\frametitle{Integrating frequency-domain EIS predictions}
+\vspace{-2em}
+\begin{columns}
+\begin{column}{0.5\textwidth}
+\vspace{2em}
+\begin{block}{Combine costs with weighting:}
+\begin{lstlisting}[firstnumber=1, xleftmargin=10pt]
+# Generate multiple cost functions and combine them
+cost1 = pybop.GravimetricEnergyDensity(problem)
+cost2 = pybop.VolumetricEnergyDensity(problem)
+cost = pybop.WeightedCost(cost1, cost2, weights=[1, 1e-3])
+\end{lstlisting}
+\end{block}
+\vspace{3.5em}
+\end{column}
+ % Right column with image
+\begin{column}{0.5\textwidth}
+%    \vspace{-1em}
+    \begin{figure}
+    \includegraphics[width=0.94\textwidth]{Images/Highlights/weighted-design-landscape.png}
+    \end{figure}
+\end{column}
+\end{columns}
+\end{frame}
+
+
+\begin{frame}[fragile,t]{New features that landed in v24.9}
+    \vspace{-1em}
+    \issue{357} - Adds Transformations classes\\[1em]
+    \issue{222} - Adds an example for performing electrode balancing\\[1em]
+    \issue{441} - Adds an example for estimating constants within a pybamm.FunctionalParameter\\[1em]
+    \issue{450} - Adds support for IDAKLU with output variables\\[1em]
+    \issue{444} - Merge BaseModel build() and rebuild() functionality
 \end{frame}
 
 \section{Discussion}
@@ -143,18 +160,33 @@
     \LARGE{\faUserPlus} \LARGE{\faBug} \\
     \normalsize
     \begin{flushleft}
-        Let's introduce everyone:
+        Kick-off questions:
     \end{flushleft}
     \begin{itemize}
-        \item Where are you joining from?
         \item What issue are you working on/would you like to work on?
+        \item Do you have any blockers?
     \end{itemize}
     \vspace{6mm} \normalsize
     Open issues: \href{https://github.com/pybop-team/PyBOP/issues}{https://github.com/pybop-team/PyBOP/issues} \\
-    Project board: \href{https://github.com/orgs/pybop-team/projects/7}{https://github.com/orgs/pybop-team/projects/7}
+    Project board: \href{https://github.com/orgs/pybop-team/projects/9}{https://github.com/orgs/pybop-team/projects/8}
     \end{beamercolorbox}
 \end{frame}
 
+\begin{frame}[plain]
+    \centering
+    \begin{beamercolorbox}[sep=8pt,center,shadow=true,rounded=true]{title}
+    \usebeamerfont{title}{Triage new issues}\par%
+    \color{oxfordblue}\noindent\rule{10cm}{1pt} \\
+    \end{beamercolorbox}
+\end{frame}
+
+\begin{frame}[plain]
+    \centering
+    \begin{beamercolorbox}[sep=8pt,center,shadow=true,rounded=true]{title}
+    \usebeamerfont{title}{Other open items?}\par%
+    \color{oxfordblue}\noindent\rule{10cm}{1pt} \\
+    \end{beamercolorbox}
+\end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%
 %%%% INTRODUCTION %%%%
