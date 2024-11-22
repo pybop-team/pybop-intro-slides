@@ -10,11 +10,12 @@
 % To crop graphics, use: [trim={left bottom right top},clip]
 % Icons can be found at: https://anorien.csc.warwick.ac.uk/mirrors/CTAN/fonts/fontawesome/doc/fontawesome.pdf
 
-\title{4th Online Developer Meeting}
+\title{}
 \titlegraphic{\includegraphics[width=6cm]{Theme/Logos/PyBOP_logo.png}}
 \author{The PyBOP Team \texorpdfstring{\hypersetup{urlcolor=white}\href{https://github.com/pybop-team/PyBOP}{\faGithub}}{}}
 \institute{}
-\date{\today}
+\date{Online Developer Meetings \\
+on the third Thursday, every other month}
 
 \begin{document}
 
@@ -36,10 +37,10 @@
     \LARGE{\faFileTextO} \\
     \vspace{6mm} \normalsize
     \begin{itemize}
-        \item Presentation on recent updates to PyBOP (10 min)
+        \item Recap of recent updates to PyBOP (10 min)
         \item Quick update from everyone (10 min)
-        \item Discussion of open issues (20 min)
-        \item Planning and assignment of tasks (15 min)
+        \item Discussion of open issues (30 min)
+        \item Planning and assignment of tasks (10 min)
     \end{itemize}
     \end{beamercolorbox}
     Introductory slides are available at the end of this presentation.
@@ -59,96 +60,18 @@
 \begin{frame}[plain]
     \centering
     \begin{beamercolorbox}[sep=8pt,center,shadow=true,rounded=true]{title}
-    \usebeamerfont{title}{Releases}\par%
+    \usebeamerfont{title}{Latest release}\par%
     \color{oxfordblue}\noindent\rule{10cm}{1pt} \\
     \LARGE{\faCloudUpload} \\
     \vspace{6mm} \normalsize
-    v24.9.1 was released on September 18th. \\
+    Aiming for a new release every 3 months. \\
+    \href{https://pypi.org/project/pybop/}{https://pypi.org/project/pybop/} \\
     \vspace{6mm}
-    \href{https://github.com/pybop-team/PyBOP/blob/develop/CHANGELOG.md}{https://github.com/pybop-team/PyBOP/blob/develop/CHANGELOG.md} \\
-    \vspace{6mm}
-    The Changelog is divided into new \textbf{features},  \textbf{bug fixes} and \textbf{breaking changes}.
+    The Changelog is updated with new \textbf{features},  \textbf{bug fixes} and \textbf{breaking changes}. \\
+    \href{https://github.com/pybop-team/PyBOP/blob/develop/CHANGELOG.md}{https://github.com/pybop-team/PyBOP/blob/develop/CHANGELOG.md}
     \end{beamercolorbox}
 \end{frame}
 
-\begin{frame}[fragile,t]{New features that landed in v24.9}
-    \vspace{-6mm}
-    \issue{462} - Adds Minkowski and SumofPower cost functions. \\
-    \issue{6} - Adds Monte Carlo Sampling classes
-
-    \begin{figure}
-        \centering
-        \includegraphics[width=0.5\textwidth]{Images/Highlights/minkowski-sum-of-power.png}
-        \hspace{1em}
-        \includegraphics[width=0.455\textwidth]{Images/Highlights/SPMe posterior.png}
-        % \caption{Caption}
-        \label{fig:optimisersNew}
-    \end{figure}
-\end{frame}
-
-\begin{frame}[fragile,t]{New features that landed in v24.9}
-    \vspace{-6mm}
-    \issue{353} - Allows user defined nonlinear constraints
-
-    \begin{figure}
-        \centering
-        \includegraphics[width=0.37\textwidth]{Images/Highlights/trust-const-identification.png}
-        \hspace{3em}
-        \includegraphics[width=0.37\textwidth]{Images/Highlights/trust-const-convergence.png}
-        % \caption{Caption}
-        \label{fig:WeppnerHuggins}
-    \end{figure}
-\end{frame}
-
-\begin{frame}[fragile,t]{New features that landed in v24.9}
-    \vspace{-6mm}
-        \issue{405} - Adds EIS prediction methods
-
-    \begin{figure}
-        \centering
-        \includegraphics[width=0.35\textwidth]{Images/Highlights/nyquist-eis-identification.png}
-        \hspace{3em}
-        \includegraphics[width=0.37\textwidth]{Images/Highlights/eis-identification-landscape.png}
-        % \caption{Caption}
-        \label{fig:WeppnerHuggins}
-    \end{figure}
-\end{frame}
-
-\begin{frame}[fragile,t]
-\frametitle{Integrating frequency-domain EIS predictions}
-\vspace{-2em}
-\begin{columns}
-\begin{column}{0.5\textwidth}
-\vspace{2em}
-\begin{block}{Combine costs with weighting:}
-\begin{lstlisting}[firstnumber=1, xleftmargin=10pt]
-# Generate multiple cost functions and combine them
-cost1 = pybop.GravimetricEnergyDensity(problem)
-cost2 = pybop.VolumetricEnergyDensity(problem)
-cost = pybop.WeightedCost(cost1, cost2, weights=[1, 1e-3])
-\end{lstlisting}
-\end{block}
-\vspace{3.5em}
-\end{column}
- % Right column with image
-\begin{column}{0.5\textwidth}
-%    \vspace{-1em}
-    \begin{figure}
-    \includegraphics[width=0.94\textwidth]{Images/Highlights/weighted-design-landscape.png}
-    \end{figure}
-\end{column}
-\end{columns}
-\end{frame}
-
-
-\begin{frame}[fragile,t]{New features that landed in v24.9}
-    \vspace{-1em}
-    \issue{357} - Adds Transformations classes\\[1em]
-    \issue{222} - Adds an example for performing electrode balancing\\[1em]
-    \issue{441} - Adds an example for estimating constants within a pybamm.FunctionalParameter\\[1em]
-    \issue{450} - Adds support for IDAKLU with output variables\\[1em]
-    \issue{444} - Merge BaseModel build() and rebuild() functionality
-\end{frame}
 
 \section{Discussion}
 
@@ -168,7 +91,7 @@ cost = pybop.WeightedCost(cost1, cost2, weights=[1, 1e-3])
     \end{itemize}
     \vspace{6mm} \normalsize
     Open issues: \href{https://github.com/pybop-team/PyBOP/issues}{https://github.com/pybop-team/PyBOP/issues} \\
-    Project board: \href{https://github.com/orgs/pybop-team/projects/9}{https://github.com/orgs/pybop-team/projects/8}
+    Project board: \href{https://github.com/orgs/pybop-team/projects/}{https://github.com/orgs/pybop-team/projects/}
     \end{beamercolorbox}
 \end{frame}
 
@@ -566,6 +489,75 @@ Optimised gravimetric energy density: 410.78 Wh.kg-1
     \end{beamercolorbox}
 \end{frame}
 
+\begin{frame}[fragile,t]{New in v24.9: New costs and samplers}
+    \vspace{-6mm}
+    \issue{462} - Adds Minkowski and SumofPower cost functions. \\
+    \issue{6} - Adds Monte Carlo Sampling classes
+
+    \begin{figure}
+        \centering
+        \includegraphics[width=0.5\textwidth]{Images/Highlights/minkowski-sum-of-power.png}
+        \hspace{1em}
+        \includegraphics[width=0.455\textwidth]{Images/Highlights/SPMe posterior.png}
+        % \caption{Caption}
+        \label{fig:optimisersNew}
+    \end{figure}
+\end{frame}
+
+\begin{frame}[fragile,t]{New in v24.9: Constrained optimisation}
+    \vspace{-6mm}
+    \issue{353} - Allows user defined nonlinear constraints
+
+    \begin{figure}
+        \centering
+        \includegraphics[width=0.37\textwidth]{Images/Highlights/trust-const-identification.png}
+        \hspace{3em}
+        \includegraphics[width=0.37\textwidth]{Images/Highlights/trust-const-convergence.png}
+        % \caption{Caption}
+        \label{fig:WeppnerHuggins}
+    \end{figure}
+\end{frame}
+
+\begin{frame}[fragile,t]{New in v24.9: Electrochemical impedance spectroscopy}
+    \vspace{-6mm}
+        \issue{405} - Adds EIS prediction methods
+
+    \begin{figure}
+        \centering
+        \includegraphics[width=0.35\textwidth]{Images/Highlights/nyquist-eis-identification.png}
+        \hspace{3em}
+        \includegraphics[width=0.37\textwidth]{Images/Highlights/eis-identification-landscape.png}
+        % \caption{Caption}
+        \label{fig:WeppnerHuggins}
+    \end{figure}
+\end{frame}
+
+\begin{frame}[fragile,t]
+\frametitle{New in 24.9: Weighted costs}
+\vspace{-2em}
+\begin{columns}
+\begin{column}{0.5\textwidth}
+\vspace{2em}
+\begin{block}{Combine costs with weighting:}
+\begin{lstlisting}[firstnumber=1, xleftmargin=10pt]
+# Generate multiple cost functions and combine them
+cost1 = pybop.GravimetricEnergyDensity(problem)
+cost2 = pybop.VolumetricEnergyDensity(problem)
+cost = pybop.WeightedCost(cost1, cost2, weights=[1, 1e-3])
+\end{lstlisting}
+\end{block}
+\vspace{3.5em}
+\end{column}
+ % Right column with image
+\begin{column}{0.5\textwidth}
+%    \vspace{-1em}
+    \begin{figure}
+    \includegraphics[width=0.94\textwidth]{Images/Highlights/weighted-design-landscape.png}
+    \end{figure}
+\end{column}
+\end{columns}
+\end{frame}
+
 \begin{frame}[fragile,t]{New in v24.6: Experimental data fitting}
     \vspace{-6mm}
     \issue{241} - Adds experimental circuit model fitting notebook with LG M50 data from: \href{https://github.com/WDWidanage/Simscape-Battery-Library/tree/main/Examples/parameterEstimation_TECMD/Data}{https://github.com/WDWidanage/Simscape-Battery-Library/tree/main/Examples/parameterEstimation\_TECMD/Data}
@@ -598,31 +590,4 @@ Optimised gravimetric energy density: 410.78 Wh.kg-1
     \end{figure}
 \end{frame}
 
-\begin{frame}[fragile,t]{New in v24.6: Testing and infrastructure}
-    \vspace{-6mm}
-    Credit and thanks to Agriya and Brady!
-    \begin{block}{Features}
-    \begin{lstlisting}[firstnumber=1, xleftmargin=10pt]
-#304 - Decreases the testing suite completion time.
-#301 - Updates default echem solver to "fast with events" mode.
-#251 - Increment PyBaMM > v23.5, remove redundant tests within integration tests, increment citation version, fix examples with incorrect model definitions.
-#285 - Drop support for Python 3.8.
-#268 - Fixes the GitHub Release artifact uploads, allowing verification of codesigned binaries and source distributions via sigstore-python.
-#79 - Adds BPX as a dependency and imports BPX support from PyBaMM.
-#267 - Add classifiers to pyproject.toml, update project.urls.
-#195 - Adds the Nelder-Mead optimiser from PINTS as another option.
-    \end{lstlisting}
-    \end{block}
-    \begin{block}{Bug Fixes}
-    \begin{lstlisting}[firstnumber=1, xleftmargin=10pt]
-#317 - Installs seed packages into nox sessions, ensuring that scheduled tests can pass.
-#308 - Enables testing on both macOS Intel and macOS ARM (Silicon) runners and fixes the scheduled tests.
-#299 - Bugfix multiprocessing support for Linux, MacOS, Windows (WSL) and improves coverage.
-#270 - Updates PR template.
-#91 - Adds a check on the number of parameters for CMAES and makes XNES the default optimiser.
-    \end{lstlisting}
-    \end{block}
-\end{frame}
-
 \end{document}
-
